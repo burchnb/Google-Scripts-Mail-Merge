@@ -224,7 +224,7 @@ function sendEmails() {
     // Given a template string, replace markers (for instance ${"First Name"}) with
     // the corresponding value in a row object (for instance rowData.firstName).
     var emailText = fillInTemplateFromObject(emailTemplate, rowData);
-    var emailSubject = "Tutorial: Simple Mail Merge";
+    var emailSubject = "Lunch Heroes";
 
     MailApp.sendEmail(rowData.emailAddress, emailSubject, emailText);
   }
