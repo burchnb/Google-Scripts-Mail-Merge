@@ -381,3 +381,20 @@ function isAlnum(char) {
 function isDigit(char) {
   return char >= '0' && char <= '9';
 }
+
+/**
+ * Adds a custom menu to the active spreadsheet, containing a single menu item
+ * for invoking the doMerge() function specified above.
+ * The onOpen() function, when defined, is automatically invoked whenever the
+ * spreadsheet is opened.
+ * For more information on using the Spreadsheet API, see
+ * https://developers.google.com/apps-script/service_spreadsheet
+ */
+function onOpen() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var entries = [{
+    name : "Start Merge",
+    functionName : "myFunction"
+  }];
+  spreadsheet.addMenu("Merge", entries);
+};
