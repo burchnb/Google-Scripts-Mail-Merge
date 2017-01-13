@@ -4,7 +4,7 @@ var finalCustRows=[{}];
 function getObj($a){
   var req=$a;
   var sheet=SpreadsheetApp.getActiveSpreadsheet();
-  var mainSheet=sheet.getSheetByName("s1");
+  var mainSheet=sheet.getSheetByName("List");  //Change "List" to the name of your customer list sheet.
   var rows=mainSheet.getDataRange();
   var numRows=rows.getLastRow();
   var numCols=rows.getLastColumn();
