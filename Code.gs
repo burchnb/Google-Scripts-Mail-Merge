@@ -17,6 +17,7 @@ function getObj($a){
     case "numCols":return numCols;break;
     case "ui":return ui;break;
     case "nameColumn":return "B";break;
+    case "mailingListColumn":return "G";break;
     default:return "unknown";
   }
 }
@@ -90,7 +91,46 @@ function myFunction() {
       inc++;
     }
   }
+  var testthis=checkIfOnMailingList();
+  var testmsg="";
+  if(testthis.length>0){
+    for(var i=0;i<testthis.length;i++){
+      testmsg=testmsg+"Row "+testthis[i]+": "+getObj("mainSheet").getRange(getObj("nameColumn")+testthis[i]).getDisplayValue()+"\n";
+    }
+    var confirmInput=getObj("ui").alert("The following customers have chosen not to be a part of the mailing list:\n\n"+testmsg+"\n\n Do you still want to send the email message to them?",getObj("ui").ButtonSet.YES_NO);
+    if(confirmInput==getObj("ui").Button.NO){
+      removeCustomerRows(testthis);
+      Logger.log("WE WILL REMOVE THESE ROWS!");
+    }
+  }
   sendEmails();
+}
+
+function removeCustomerRows($a){
+  var rRows=[{}];
+  var index;
+  rRows=$a;
+  for(var inc=0;inc<rRows.length;inc++){
+    index=finalCustRows.indexOf(rRows[inc]);
+    if(index>-1){
+      Logger.log("going to delete " + finalCustRows[index]);
+      finalCustRows.splice(index,1);
+    }
+  }
+}
+
+function checkIfOnMailingList(){
+  var check="";
+  var arr=[{}];
+  var inc=0;
+  for(var i=0;i<finalCustRows.length;i++){
+    check=getObj("mainSheet").getRange(getObj("mailingListColumn")+finalCustRows[i]).getDisplayValue();
+    if(check.indexOf("Yes")<0){
+      arr[inc]=finalCustRows[i];
+      inc++;
+    }
+  }
+  return arr;
 }
 
 function checkInput($a){
