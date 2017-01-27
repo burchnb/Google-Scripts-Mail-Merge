@@ -55,7 +55,7 @@ function myFunction() {
   var customersToEmail=[{}];
   var messageToEmail="";
   var errorCheck=[{}];
-  var input=getObj("ui").prompt("Which Row Numbers?",getObj("ui").ButtonSet.OK_CANCEL);
+  var input=getObj("ui").prompt("Which Row Numbers?\n\n(Example: 2,4 is Rows 2 and 4 and 2:4 is Rows 2 through 4.)",getObj("ui").ButtonSet.OK_CANCEL);
   if(input.getSelectedButton()==getObj("ui").Button.CANCEL) return; else Logger.log("input is "+input.getResponseText());
   var inf=input.getResponseText();
   errorCheck=checkInput(inf);
